@@ -1,0 +1,17 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AwqatSalaat.Linux.App"
+             RequestedThemeVariant="Default">
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+    
+    <Application.Resources>
+        <!-- Define application-wide resources here -->
+        <SolidColorBrush x:Key="PrimaryBrush" Color="#0078D7"/>
+        <SolidColorBrush x:Key="SecondaryBrush" Color="#E81123"/>
+        <SolidColorBrush x:Key="TextHighlightBrush" Color="#0078D7"/>
+    </Application.Resources>
+</Application>

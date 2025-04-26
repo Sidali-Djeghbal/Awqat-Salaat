@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+# Create config directory if it doesn't exist
+mkdir -p /home/$SUDO_USER/.config/awqat-salaat
+
+# Set permissions for the application files
+chmod +x /usr/bin/awqat-salaat
+
+# Update desktop database
+if [ -x "$(command -v update-desktop-database)" ]; then
+    update-desktop-database -q
+fi
+
+# Create autostart entry if requested during installation
+if [ "$1" = "configure" ]; then
+    # Copy desktop file to autostart directory if user wants autostart
+    if [ -d "/home/$SUDO_USER/.config/autostart" ]; then
+        cp /usr/share/applications/awqat-salaat.desktop /home/$SUDO_USER/.config/autostart/
+        chown $SUDO_USER:$SUDO_USER /home/$SUDO_USER/.config/autostart/awqat-salaat.desktop
+    fi
+fi
+
+exit 0

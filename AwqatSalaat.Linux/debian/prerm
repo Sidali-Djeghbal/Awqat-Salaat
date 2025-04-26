@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+# Remove autostart entry if it exists
+if [ -f "/home/$SUDO_USER/.config/autostart/awqat-salaat.desktop" ]; then
+    rm -f /home/$SUDO_USER/.config/autostart/awqat-salaat.desktop
+fi
+
+# Update desktop database
+if [ -x "$(command -v update-desktop-database)" ]; then
+    update-desktop-database -q
+fi
+
+exit 0

@@ -1,0 +1,11 @@
+Package: awqat-salaat
+Version: 1.0.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: Awqat Salaat Team
+Description: Islamic prayer times widget for Linux
+ An Islamic prayer times widget that displays the next prayer time and countdown.
+ This Linux version is built using Avalonia UI framework and provides the same
+ core functionality as the Windows version, adapted for Linux desktop environments.
+Depends: libappindicator3-1, libnotify-bin, pulseaudio

@@ -1,0 +1,197 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:AwqatSalaat.Linux.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
+        x:Class="AwqatSalaat.Linux.Views.SettingsWindow"
+        Width="500" Height="450"
+        Title="Awqat Salaat Settings">
+
+    <Design.DataContext>
+        <vm:SettingsViewModel/>
+    </Design.DataContext>
+
+    <Window.Styles>
+        <Style Selector="TabControl">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style Selector="TabItem">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10 5"/>
+        </Style>
+        <Style Selector="CheckBox">
+            <Setter Property="Margin" Value="0 5"/>
+        </Style>
+        <Style Selector="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="Width" Value="200"/>
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="MinWidth" Value="80"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="*,Auto">
+        <TabControl Grid.Row="0">
+            <!-- General Settings Tab -->
+            <TabItem Header="General">
+                <ScrollViewer>
+                    <StackPanel Margin="10">
+                        <CheckBox IsChecked="{Binding Config.StartWithSystem}">
+                            Start with system
+                        </CheckBox>
+                        
+                        <CheckBox IsChecked="{Binding Config.EnableNotifications}">
+                            Enable notifications
+                        </CheckBox>
+                        
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" Margin="0 10">
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="0 5 10 5">
+                                Notification time:
+                            </TextBlock>
+                            <ComboBox Grid.Row="0" Grid.Column="1" 
+                                      Items="{Binding NotificationTimes}"
+                                      SelectedItem="{Binding SelectedNotificationTime}"/>
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0 5 10 5">
+                                Language:
+                            </TextBlock>
+                            <ComboBox Grid.Row="1" Grid.Column="1" 
+                                      Items="{Binding Languages}"
+                                      SelectedItem="{Binding SelectedLanguage}"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <!-- Prayer Times Tab -->
+            <TabItem Header="Prayer Times">
+                <ScrollViewer>
+                    <StackPanel Margin="10">
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" Margin="0 10">
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="0 5 10 5">
+                                Calculation method:
+                            </TextBlock>
+                            <ComboBox Grid.Row="0" Grid.Column="1" 
+                                      Items="{Binding CalculationMethods}"
+                                      SelectedItem="{Binding SelectedCalculationMethod}"/>
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0 5 10 5">
+                                Juristic method:
+                            </TextBlock>
+                            <ComboBox Grid.Row="1" Grid.Column="1" 
+                                      Items="{Binding JuristicMethods}"
+                                      SelectedItem="{Binding SelectedJuristicMethod}"/>
+                            
+                            <TextBlock Grid.Row="2" Grid.Column="0" Margin="0 5 10 5">
+                                Location:
+                            </TextBlock>
+                            <Grid Grid.Row="2" Grid.Column="1" ColumnDefinitions="*,Auto">
+                                <TextBox Text="{Binding LocationText}" Margin="0 5"/>
+                                <Button Grid.Column="1" Command="{Binding DetectLocationCommand}">
+                                    Detect
+                                </Button>
+                            </Grid>
+                            
+                            <TextBlock Grid.Row="3" Grid.Column="0" Margin="0 5 10 5">
+                                Time format:
+                            </TextBlock>
+                            <ComboBox Grid.Row="3" Grid.Column="1" 
+                                      Items="{Binding TimeFormats}"
+                                      SelectedItem="{Binding SelectedTimeFormat}"/>
+                        </Grid>
+                        
+                        <Expander Header="Prayer Notifications" IsExpanded="True" Margin="0 10">
+                            <StackPanel Margin="10 5">
+                                <CheckBox IsChecked="{Binding Config.NotifyFajr}">Fajr</CheckBox>
+                                <CheckBox IsChecked="{Binding Config.NotifySunrise}">Sunrise</CheckBox>
+                                <CheckBox IsChecked="{Binding Config.NotifyDhuhr}">Dhuhr</CheckBox>
+                                <CheckBox IsChecked="{Binding Config.NotifyAsr}">Asr</CheckBox>
+                                <CheckBox IsChecked="{Binding Config.NotifyMaghrib}">Maghrib</CheckBox>
+                                <CheckBox IsChecked="{Binding Config.NotifyIsha}">Isha</CheckBox>
+                            </StackPanel>
+                        </Expander>
+                        
+                        <Expander Header="Adhan Settings" IsExpanded="False" Margin="0 10">
+                            <StackPanel Margin="10 5">
+                                <CheckBox IsChecked="{Binding Config.EnableAdhan}">
+                                    Enable Adhan
+                                </CheckBox>
+                                
+                                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" Margin="0 10">
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="0 5 10 5">
+                                        Fajr Adhan:
+                                    </TextBlock>
+                                    <ComboBox Grid.Row="0" Grid.Column="1" 
+                                              Items="{Binding FajrAdhanSounds}"
+                                              SelectedItem="{Binding SelectedFajrAdhan}"/>
+                                    
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="0 5 10 5">
+                                        Regular Adhan:
+                                    </TextBlock>
+                                    <ComboBox Grid.Row="1" Grid.Column="1" 
+                                              Items="{Binding RegularAdhanSounds}"
+                                              SelectedItem="{Binding SelectedRegularAdhan}"/>
+                                </Grid>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <!-- Display Tab -->
+            <TabItem Header="Display">
+                <ScrollViewer>
+                    <StackPanel Margin="10">
+                        <CheckBox IsChecked="{Binding Config.ShowSeconds}">
+                            Show seconds in countdown
+                        </CheckBox>
+                        
+                        <CheckBox IsChecked="{Binding Config.ShowNextPrayerName}">
+                            Show next prayer name
+                        </CheckBox>
+                        
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto" Margin="0 10">
+                            <TextBlock Grid.Column="0" Margin="0 5 10 5">
+                                Widget theme:
+                            </TextBlock>
+                            <ComboBox Grid.Column="1" 
+                                      Items="{Binding Themes}"
+                                      SelectedItem="{Binding SelectedTheme}"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <!-- About Tab -->
+            <TabItem Header="About">
+                <StackPanel Margin="20" HorizontalAlignment="Center">
+                    <TextBlock Text="Awqat Salaat" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding VersionInfo}" Margin="0 5" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Islamic Prayer Times Widget" Margin="0 10" HorizontalAlignment="Center"/>
+                    <TextBlock Text="© 2023 Awqat Salaat Team" Margin="0 20" HorizontalAlignment="Center"/>
+                    
+                    <Button Command="{Binding OpenWebsiteCommand}" HorizontalAlignment="Center">
+                        Visit Website
+                    </Button>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        
+        <!-- Button Panel -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto" Margin="10">
+            <Button Grid.Column="1" Command="{Binding SaveCommand}">
+                Save
+            </Button>
+            <Button Grid.Column="2" Command="{Binding CancelCommand}">
+                Cancel
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

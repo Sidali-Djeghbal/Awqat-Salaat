@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Awqat Salaat
+Comment=Islamic prayer times widget
+Exec=/usr/bin/awqat-salaat
+Icon=/usr/share/awqat-salaat/as_ico_linux.ico
+Terminal=false
+Type=Application
+Categories=Utility;Religious;
+StartupNotify=true
+X-GNOME-Autostart-enabled=false

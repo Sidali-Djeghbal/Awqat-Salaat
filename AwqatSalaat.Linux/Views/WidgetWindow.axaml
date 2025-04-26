@@ -1,0 +1,52 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:AwqatSalaat.Linux.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="126" d:DesignHeight="40"
+        x:Class="AwqatSalaat.Linux.Views.WidgetWindow"
+        Width="126" Height="40"
+        Title="Awqat Salaat">
+
+    <Design.DataContext>
+        <vm:WidgetViewModel/>
+    </Design.DataContext>
+
+    <Window.Styles>
+        <Style Selector="Border.widget-container">
+            <Setter Property="Background" Value="#2D2D30"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="BorderBrush" Value="#3F3F46"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        
+        <Style Selector="Border.notification-active">
+            <Setter Property="Background" Value="#5E2129"/>
+        </Style>
+        
+        <Style Selector="TextBlock.prayer-name">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        
+        <Style Selector="TextBlock.countdown">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Styles>
+
+    <Border Name="mainPanel" Classes="widget-container">
+        <Grid RowDefinitions="*,*" Margin="4">
+            <TextBlock Grid.Row="0" 
+                       Classes="prayer-name"
+                       Text="{Binding Next.Name}"/>
+            
+            <TextBlock Grid.Row="1" 
+                       Classes="countdown"
+                       Text="{Binding Next.RemainingTime}"/>
+        </Grid>
+    </Border>
+</Window>
