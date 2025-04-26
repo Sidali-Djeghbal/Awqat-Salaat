@@ -43,6 +43,8 @@ if command -v dpkg-deb &> /dev/null; then
     
     # Copy application files
     cp -r "$BUILD_DIR/publish/awqat-salaat"/* "$DEB_DIR/usr/share/awqat-salaat/"
+    # Copy the icon file
+    cp "./Assets/as_ico_linux.ico" "$DEB_DIR/usr/share/awqat-salaat/"
     
     # Create launcher script
     echo '#!/bin/sh' > "$DEB_DIR/usr/bin/awqat-salaat"
@@ -91,9 +93,9 @@ exec "${EXEC}" "$@"
 EOF
     chmod +x "$APPDIR/AppRun"
     
-    # Copy desktop file and icon
-    cp "./debian/awqat-salaat.desktop" "$APPDIR/"
-    cp "./Assets/as_ico_linux.ico" "$APPDIR/usr/share/icons/hicolor/256x256/apps/awqat-salaat.png"
+    # Copy AppImage desktop file and icon
+    cp "./appimage/awqat-salaat.desktop" "$APPDIR/"
+    cp "./Assets/as_ico_linux.ico" "$APPDIR/awqat-salaat.png" # Icon name matches 'Icon=' in desktop file
     
     # Build the AppImage
     APPIMAGE_EXTRACT_AND_RUN=1 appimagetool "$APPDIR" "$BUILD_DIR/awqat-salaat-1.0.0-x86_64.AppImage"

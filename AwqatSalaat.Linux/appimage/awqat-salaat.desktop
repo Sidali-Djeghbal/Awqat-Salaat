@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Awqat Salaat
+Comment=Islamic prayer times widget
+Exec=awqat-salaat
+Icon=awqat-salaat
+Terminal=false
+Type=Application
+Categories=Utility;Religious;
+StartupNotify=true
